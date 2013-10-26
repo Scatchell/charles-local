@@ -1,0 +1,8 @@
+1. Allow for small alterations to time (command line access?)
+
+2. Selenium or other auto submit functionality?
+
+3. When staying past midnight, day should not bleed over
+    a. When 8 hours out of network have elapsed, start a new day
+    or
+    b. Only log new days when starting work after 5am
