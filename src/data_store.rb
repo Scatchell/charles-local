@@ -1,16 +1,20 @@
 require 'yaml'
 class DataStore
   attr_accessor :yaml_data
-  @file_name = 'data/days.dys'
 
-  def self.save_days(days)
-    File.open(@file_name, 'w') do |f|
+  def initialize file_location
+    puts "&&:" + file_location
+    @days_file_location = file_location
+  end
+
+  def save_days(days)
+    File.open(@days_file_location, 'w') do |f|
       f.write YAML::dump(days)
     end
   end
 
-  def self.load_days
-    YAML::load(File.open(@file_name).read)
+  def load_days
+    YAML::load(File.open(@days_file_location).read)
   end
 
 end
