@@ -33,7 +33,6 @@ class Charles
       @days[now.to_date] ||= Day.new now
       @days[now.to_date].end now
       @data_store.save_days @days
-      #todo else, puts 'Off network detected @ ' + now.to_s
     end
   end
 
@@ -44,32 +43,45 @@ class Charles
 
       weeks = days_to_weeks @days
 
-      weeks.each do |week|
-        first_day_of_week = beg_of_week week[0].start_time
-        last_day_of_week = end_of_week week[0].start_time
-
-        puts 'Week: ' + first_day_of_week.strftime('%A') + ', ' + first_day_of_week.month.to_s + '/' + first_day_of_week.day.to_s + " - " + last_day_of_week.month.to_s + '/' + last_day_of_week.day.to_s
-        week.each do |day|
-          puts day.start_time.strftime('%A') + ', ' + day.start_time.month.to_s + '/' + day.start_time.day.to_s + ': ' + day.time_worked.to_s
-        end
-      end
+      display_days_by_week weeks
     else
       @days = {}
     end
 
+    begin_watching
+
+  end
+
+  def begin_watching
     while true
       if @count > 0
         create_or_end_day
         sleep @check_time_in_seconds
-        unless @infinite
-          @count -= 1
-        end
+        decrement_count
       else
-        p @days
+        puts 'Charles is done watching...'
+        display_days_by_week days_to_weeks(@days)
         exit!
       end
     end
+  end
 
+  def decrement_count
+    unless @infinite
+      @count -= 1
+    end
+  end
+
+  def display_days_by_week(weeks)
+    weeks.each do |week|
+      first_day_of_week = beg_of_week week[0].start_time
+      last_day_of_week = end_of_week week[0].start_time
+
+      puts 'Week: ' + first_day_of_week.strftime('%A') + ', ' + first_day_of_week.month.to_s + '/' + first_day_of_week.day.to_s + " - " + last_day_of_week.month.to_s + '/' + last_day_of_week.day.to_s
+      week.each do |day|
+        puts day.start_time.strftime('%A') + ', ' + day.start_time.month.to_s + '/' + day.start_time.day.to_s + ': ' + day.time_worked.to_s
+      end
+    end
   end
 
   def beg_of_week first_day_start_time

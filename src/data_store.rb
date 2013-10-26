@@ -3,7 +3,6 @@ class DataStore
   attr_accessor :yaml_data
 
   def initialize file_location
-    puts "&&:" + file_location
     @days_file_location = file_location
   end
 
