@@ -1,3 +1,3 @@
 module SSIDConstants
-    WORK_SSID = ['twpublic', 'twdata']
+    WORK_SSID = ['AndroidAnthony', 'Discovery', 'Discovery-Guest']
 end
