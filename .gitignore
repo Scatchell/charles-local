@@ -3,3 +3,4 @@ tar/
 hardcopy*
 .DS_Store
 days.dys
+logs/
