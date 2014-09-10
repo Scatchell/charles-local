@@ -1,1 +1,1 @@
-rvm use 2.0.0@charles --create
+rvm use 2.1.2@charles-local --create

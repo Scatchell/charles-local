@@ -49,7 +49,6 @@ class Charles
     end
 
     begin_watching
-
   end
 
   def begin_watching
